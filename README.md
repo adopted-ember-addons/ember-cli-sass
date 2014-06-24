@@ -10,9 +10,9 @@ npm install --save-dev ember-cli-sass
 
 ## Usage
 
-By default it will compile `app/styles/app.scss` into `dist/assets/app.css` and produce a sourceMap for your delectation.
+By default this addon will compile `app/styles/app.scss` into `dist/assets/app.css` and produce a sourceMap for your delectation.
 
-Or, if you want more control then there's you can specify options using the `sassOptions` config property:
+Or, if you want more control then you can specify options using the `sassOptions` config property:
 
 ```
 var app = new EmberApp({
