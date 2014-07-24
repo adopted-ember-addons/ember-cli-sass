@@ -29,8 +29,9 @@ EmberCLISASS.prototype.treeFor = function treeFor(type) {
 };
 
 EmberCLISASS.prototype.included = function included(app) {
-  this.options = app.options.sassOptions;
-  app.registry.add('css', new SASSPlugin(this.options));
+  var options = app.options.sassOptions;
+  options.outputFile = options.outputFile || this.project.name() + '.css';
+  app.registry.add('css', new SASSPlugin(options));
 };
 
 module.exports = EmberCLISASS;
