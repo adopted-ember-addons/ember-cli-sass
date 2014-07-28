@@ -29,7 +29,7 @@ EmberCLISASS.prototype.treeFor = function treeFor(type) {
 };
 
 EmberCLISASS.prototype.included = function included(app) {
-  var options = app.options.sassOptions;
+  var options = app.options.sassOptions || {};
   options.outputFile = options.outputFile || this.project.name() + '.css';
   app.registry.add('css', new SASSPlugin(options));
 };
