@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-sass",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Use node-sass to preprocess your ember-cli app's files, with support for sourceMaps and include paths",
   "main": "index.js",
   "scripts": {
