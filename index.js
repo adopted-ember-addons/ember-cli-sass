@@ -5,7 +5,7 @@ function SASSPlugin(options) {
   options = options || {};
   options.inputFile = options.inputFile || 'app.scss';
   options.outputFile = options.outputFile || 'app.css';
-  if (options.sourceMap || (options.sourceMap === undefined)) {
+  if (options.sourceMap) {
     options.sourceComments = 'map';
     options.sourceMap = options.outputFile + '.map';
   }
@@ -30,6 +30,9 @@ EmberCLISASS.prototype.treeFor = function treeFor(type) {
 
 EmberCLISASS.prototype.included = function included(app) {
   var options = app.options.sassOptions || {};
+  if ((options.sourceMap === undefined) && (app.env == 'development')) {
+    options.sourceMap = true;
+  }
   options.outputFile = options.outputFile || this.project.name() + '.css';
   app.registry.add('css', new SASSPlugin(options));
 };

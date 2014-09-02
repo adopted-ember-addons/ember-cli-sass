@@ -24,4 +24,4 @@ var app = new EmberApp({
 - `.inputFile`: the input SASS file, defaults to `app.scss`
 - `.outputFile`: the output CSS file, defaults to `app.css`
 - `.includePaths`: an array of include paths
-- `.sourceMap`: controls whether to generate sourceMaps, defaults to `true`. The sourceMap file will be saved to `options.outputFile + '.map'`
+- `.sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
