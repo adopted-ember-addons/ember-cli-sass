@@ -33,7 +33,7 @@ The following example assumes your bower packages are installed into `bower_comp
 Install some SASS:
 
 ```shell
-bower install --save foundation foundation-icon-fonts
+bower install --save foundation
 ```
 
 Specify some include paths in Brocfile.js:
@@ -42,8 +42,7 @@ Specify some include paths in Brocfile.js:
 var app = new EmberApp({
   sassOptions: {
     includePaths: [
-      'bower_components/foundation/scss',
-      'bower_components/foundation-icon-fonts'
+      'bower_components/foundation/scss'
     ]
   }
 });
