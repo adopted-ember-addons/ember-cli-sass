@@ -7,7 +7,7 @@ function SASSPlugin(options) {
   options.outputFile = options.outputFile || 'app.css';
   if (options.sourceMap) {
     options.sourceComments = 'map';
-    options.sourceMap = options.outputFile + '.map';
+    options.sourceMap = './' + options.outputFile + '.map';
   }
   this.options = options;
 };
@@ -35,6 +35,8 @@ EmberCLISASS.prototype.included = function included(app) {
   }
   options.outputFile = options.outputFile || this.project.name() + '.css';
   app.registry.add('css', new SASSPlugin(options));
+  // prevent conflict with broccoli-sass if it's installed
+  app.registry.remove('css', 'broccoli-sass');
 };
 
 module.exports = EmberCLISASS;
