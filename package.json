@@ -13,7 +13,7 @@
   "author": "@aexmachina",
   "license": "MIT",
   "dependencies": {
-    "broccoli-sass": "^0.2.0"
+    "broccoli-sass": "^0.2.2"
   },
   "repository": {
     "type": "git",

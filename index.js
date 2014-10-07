@@ -36,7 +36,7 @@ EmberCLISASS.prototype.included = function included(app) {
   options.outputFile = options.outputFile || this.project.name() + '.css';
   app.registry.add('css', new SASSPlugin(options));
   // prevent conflict with broccoli-sass if it's installed
-  app.registry.remove('css', 'broccoli-sass');
+  if (app.registry.remove) app.registry.remove('css', 'broccoli-sass');
 };
 
 module.exports = EmberCLISASS;
