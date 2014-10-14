@@ -1,4 +1,5 @@
 var SassCompiler = require('broccoli-sass');
+var path = require('path');
 
 function SASSPlugin(options) {
   this.name = 'ember-cli-sass';
@@ -7,16 +8,16 @@ function SASSPlugin(options) {
   options.outputFile = options.outputFile || 'app.css';
   if (options.sourceMap) {
     options.sourceComments = 'map';
-    options.sourceMap = './' + options.outputFile + '.map';
+    options.sourceMap = options.outputFile + '.map';
   }
   this.options = options;
-};
+}
 
 SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath) {
   var trees = [tree];
   if (this.options.includePaths) trees = trees.concat(this.options.includePaths);
-  inputPath += '/' + this.options.inputFile;
-  outputPath += '/' + this.options.outputFile;
+  inputPath = path.join(inputPath, this.options.inputFile);
+  outputPath = path.join(outputPath, this.options.outputFile);
   return new SassCompiler(trees, inputPath, outputPath, this.options);
 };
 
