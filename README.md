@@ -1,6 +1,6 @@
 # ember-cli-sass
 
-Use node-sass to preprocess your ember-cli app's files, with support for sourceMaps and include paths.
+Use node-sass to preprocess your ember-cli app's files, with support for source maps and include paths.
 
 ## Installation
 
@@ -10,7 +10,7 @@ npm install --save-dev ember-cli-sass
 
 ## Usage
 
-By default this addon will compile `app/styles/app.scss` into `dist/assets/app.css` and produce a sourceMap for your delectation.
+By default this addon will compile `app/styles/app.scss` into `dist/assets/app.css` and produce a source map for your delectation.
 
 Or, if you want more control then you can specify options using the `sassOptions` config property:
 
@@ -54,3 +54,7 @@ Import some deps into your app.scss:
 @import 'foundation'; /* import everything */
 /* or just import the bits you need: @import 'foundation/functions'; */
 ```
+
+## Source Maps
+
+Be aware that there are [some issues with source maps](https://github.com/joliss/broccoli-sass/issues/39) in broccoli-sass. The source maps it generates will at least show you the source file names and line number in your dev tools. When we've got a better solution in broccoli-sass you'll be able to click through to view and update the SASS files in the dev tools \o/.
