@@ -25,6 +25,7 @@ var app = new EmberApp({
 - `.outputFile`: the output CSS file, defaults to `app.css`
 - `.includePaths`: an array of include paths
 - `.sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
+- See [broccoli-sass](https://github.com/joliss/broccoli-sass) for a list of other supported options.
 
 ## Example
 

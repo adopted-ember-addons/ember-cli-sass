@@ -6,7 +6,7 @@ function SASSPlugin(options) {
   options = options || {};
   options.inputFile = options.inputFile || 'app.scss';
   options.outputFile = options.outputFile || 'app.css';
-  if (options.sourceMap) {
+  if (options.sourceMap || options.sourceMapEmbed) {
     options.sourceMapContents = true;
   }
   this.options = options;
