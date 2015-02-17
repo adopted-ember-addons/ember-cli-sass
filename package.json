@@ -13,7 +13,8 @@
   "author": "@aexmachina",
   "license": "MIT",
   "dependencies": {
-    "broccoli-sass": "^0.3.0"
+    "broccoli-sass": "^0.3.0",
+    "ember-cli-version-checker": "^1.0.2"
   },
   "repository": {
     "type": "git",

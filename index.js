@@ -1,5 +1,7 @@
 var SassCompiler = require('broccoli-sass');
 var path = require('path');
+var checker   = require('ember-cli-version-checker');
+
 
 function SASSPlugin(options) {
   this.name = 'ember-cli-sass';
@@ -21,23 +23,34 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath) {
   return new SassCompiler(trees, inputPath, outputPath, this.options);
 };
 
-function EmberCLISASS(project) {
-  this.project = project;
-  this.name = 'Ember CLI SASS';
-}
+module.exports = {
+  name:  'Ember CLI SASS',
+  shouldSetupRegistryInIncluded: function() {
+    return !checker.isAbove(this, '0.2.0');
+  },
+  sassOptions: function () {
+    var env  = process.env.EMBER_ENV;
+    var options = this.project.config(env).sassOptions || {};
 
-EmberCLISASS.prototype.treeFor = function treeFor(type) {
-};
+    if ((options.sourceMap === undefined) && (env == 'development')) {
+      options.sourceMap = true;
+    }
 
-EmberCLISASS.prototype.included = function included(app) {
-  var options = app.options.sassOptions || {};
-  if ((options.sourceMap === undefined) && (app.env == 'development')) {
-    options.sourceMap = true;
+    options.outputFile = options.outputFile || this.project.name() + '.css';
+
+    return options;
+  },
+  setupPreprocessorRegistry: function(type, registry) {
+    registry.add('css', new SASSPlugin(this.sassOptions()));
+
+    // prevent conflict with broccoli-sass if it's installed
+    if (registry.remove) registry.remove('css', 'broccoli-sass');
+  },
+  included: function included(app) {
+    this._super.included.apply(this, arguments);
+
+    if (this.shouldSetupRegistryInIncluded()) {
+      this.setupPreprocessorRegistry('parent', app.registry);
+    }
   }
-  options.outputFile = options.outputFile || this.project.name() + '.css';
-  app.registry.add('css', new SASSPlugin(options));
-  // prevent conflict with broccoli-sass if it's installed
-  if (app.registry.remove) app.registry.remove('css', 'broccoli-sass');
-};
-
-module.exports = EmberCLISASS;
+}
