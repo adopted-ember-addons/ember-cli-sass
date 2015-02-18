@@ -24,6 +24,17 @@ ENV.sassOptions =  {...}
 - `.includePaths`: an array of include paths
 - `.sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
 
+### ember-cli versions prior to 0.2.0
+
+In older versions of ember-cli the `sassOptions` config property should be added to the `EmberApp` constructor in `Brocfile.js`:
+
+```javascript
+var app = new EmberApp({
+  ...
+  sassOptions: {...}
+});
+```
+
 ## Example
 
 The following example assumes your bower packages are installed into `bower_components/`.
