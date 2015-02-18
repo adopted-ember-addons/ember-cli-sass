@@ -12,13 +12,11 @@ npm install --save-dev ember-cli-sass
 
 By default this addon will compile `app/styles/app.scss` into `dist/assets/app.css` and produce a source map for your delectation.
 
-Or, if you want more control then you can specify options using the `sassOptions` config property:
+Or, if you want more control then you can specify options using the
+`sassOptions` config property in `config/environment.js`:
 
 ```javascript
-var app = new EmberApp({
-  ...
-  sassOptions: {...}
-});
+ENV.sassOptions =  {...}
 ```
 
 - `.inputFile`: the input SASS file, defaults to `app.scss`
@@ -36,16 +34,15 @@ Install some SASS:
 bower install --save foundation
 ```
 
-Specify some include paths in Brocfile.js:
+Specify some include paths in `config/environment.js`:
 
 ```javascript
-var app = new EmberApp({
-  sassOptions: {
-    includePaths: [
-      'bower_components/foundation/scss'
-    ]
-  }
-});
+
+ENV.sassOptions = {
+  includePaths: [
+    'bower_components/foundation/scss'
+  ]
+}
 ```
 
 Import some deps into your app.scss:
