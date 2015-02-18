@@ -24,16 +24,9 @@ ENV.sassOptions =  {...}
 - `.includePaths`: an array of include paths
 - `.sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
 
-### ember-cli versions prior to 0.2.0
+### Upgrading from a previous version
 
-In older versions of ember-cli the `sassOptions` config property should be added to the `EmberApp` constructor in `Brocfile.js`:
-
-```javascript
-var app = new EmberApp({
-  ...
-  sassOptions: {...}
-});
-```
+In previous versions the `sassOptions` config property could be added to the `EmberApp` constructor in `Brocfile.js`, although this is still supported it is recommended to use the above usage.
 
 ## Example
 

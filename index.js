@@ -2,7 +2,6 @@ var SassCompiler = require('broccoli-sass');
 var path = require('path');
 var checker   = require('ember-cli-version-checker');
 
-
 function SASSPlugin(options) {
   this.name = 'ember-cli-sass';
   options = options || {};
@@ -30,16 +29,12 @@ module.exports = {
   },
   sassOptions: function () {
     var env  = process.env.EMBER_ENV;
-    var options = (this.shouldSetupRegistryInIncluded() ?
-        this.project.config(env).sassOptions :
-        this.app.options.sassOptions) || {};
-
+    var options = this.project.config(env).sassOptions
+        || (this.app && this.app.options.sassOptions) || {};
     if ((options.sourceMap === undefined) && (env == 'development')) {
       options.sourceMap = true;
     }
-
     options.outputFile = options.outputFile || this.project.name() + '.css';
-
     return options;
   },
   setupPreprocessorRegistry: function(type, registry) {
