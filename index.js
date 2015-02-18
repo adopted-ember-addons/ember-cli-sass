@@ -30,7 +30,9 @@ module.exports = {
   },
   sassOptions: function () {
     var env  = process.env.EMBER_ENV;
-    var options = this.project.config(env).sassOptions || {};
+    var options = (this.shouldSetupRegistryInIncluded() ?
+        this.project.config(env).sassOptions :
+        this.app.options.sassOptions) || {};
 
     if ((options.sourceMap === undefined) && (env == 'development')) {
       options.sourceMap = true;
@@ -47,10 +49,11 @@ module.exports = {
     if (registry.remove) registry.remove('css', 'broccoli-sass');
   },
   included: function included(app) {
+    this.app = app; // used to provide back-compat for ember-cli < 0.2.0 in sassOptions()
     this._super.included.apply(this, arguments);
 
     if (this.shouldSetupRegistryInIncluded()) {
       this.setupPreprocessorRegistry('parent', app.registry);
     }
   }
-}
+};
