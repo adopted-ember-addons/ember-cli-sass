@@ -1,5 +1,7 @@
 # ember-cli-sass
 
+[![Join the chat at https://gitter.im/aexmachina/ember-cli-sass](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aexmachina/ember-cli-sass?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Use node-sass to preprocess your ember-cli app's files, with support for source maps and include paths.
 
 ## Installation
