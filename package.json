@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-sass",
-  "version": "3.1.0-beta.5",
+  "version": "3.1.0",
   "description": "Use node-sass to preprocess your ember-cli app's files, with support for sourceMaps and include paths",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "@aexmachina",
   "license": "MIT",
   "dependencies": {
-    "broccoli-sass": "aexmachina/broccoli-sass#sources-content",
+    "broccoli-sass": "aexmachina/broccoli-sass#v0.4.x",
     "ember-cli-version-checker": "^1.0.2"
   },
   "repository": {
