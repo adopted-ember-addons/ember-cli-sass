@@ -13,7 +13,7 @@
   "author": "@aexmachina",
   "license": "MIT",
   "dependencies": {
-    "broccoli-sass": "aexmachina/broccoli-sass#v0.4.x",
+    "broccoli-sass-source-maps": "^0.6.2",
     "ember-cli-version-checker": "^1.0.2"
   },
   "repository": {
