@@ -23,6 +23,7 @@ ENV.sassOptions =  {...}
 - `.outputFile`: the output CSS file, defaults to `app.css`
 - `.includePaths`: an array of include paths
 - `.sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
+- `.ext`: the extension to look for, defaults to `scss`
 - See [broccoli-sass](https://github.com/joliss/broccoli-sass) for a list of other supported options.
 
 ### Upgrading from a previous version
