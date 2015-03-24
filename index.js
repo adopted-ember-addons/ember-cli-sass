@@ -22,7 +22,6 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, options) {
 
   if (options.includePaths) trees = trees.concat(options.includePaths);
 
-  console.log('paths', paths);
   trees = Object.keys(paths).map(function(file) {
     var input = path.join(inputPath, file + '.' + ext);
     var output = paths[file];
