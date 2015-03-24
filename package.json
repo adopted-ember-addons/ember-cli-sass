@@ -13,8 +13,10 @@
   "author": "@aexmachina",
   "license": "MIT",
   "dependencies": {
+    "broccoli-merge-trees": "^0.2.1",
     "broccoli-sass-source-maps": "^0.6.2",
-    "ember-cli-version-checker": "^1.0.2"
+    "ember-cli-version-checker": "^1.0.2",
+    "merge": "^1.2.0"
   },
   "repository": {
     "type": "git",

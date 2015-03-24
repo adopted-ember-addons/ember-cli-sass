@@ -10,7 +10,8 @@ npm install --save-dev ember-cli-sass
 
 ## Usage
 
-By default this addon will compile `app/styles/app.scss` into `dist/assets/app.css` and produce a source map for your delectation.
+By default this addon will compile `app/styles/app.scss` into `dist/assets/app.css` and produce 
+a source map for your delectation.
 
 Or, if you want more control then you can specify options using the
 `sassOptions` config property in `config/environment.js`:
@@ -19,15 +20,33 @@ Or, if you want more control then you can specify options using the
 ENV.sassOptions =  {...}
 ```
 
-- `.inputFile`: the input SASS file, defaults to `app.scss`
-- `.outputFile`: the output CSS file, defaults to `app.css`
 - `.includePaths`: an array of include paths
 - `.sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
+- `.ext`: the extension to look for, defaults to `scss`
 - See [broccoli-sass](https://github.com/joliss/broccoli-sass) for a list of other supported options.
+
+### Processing multiple files
+
+If you need to process multiple files, it can be done by [configuring the output paths](http://www.ember-cli.com/#configuring-output-paths) in your `Brocfile.js`:
+
+```js
+var app = new EmberApp({
+  outputPaths: {
+    app: {
+      css: {
+        'app': '/assets/application-name.css',
+        'themes/alpha': '/assets/themes/alpha.css'
+      }
+    }
+  }
+});
+```
 
 ### Upgrading from a previous version
 
 In previous versions the `sassOptions` config property could be added to the `EmberApp` constructor in `Brocfile.js`, although this is still supported it is recommended to use the above usage.
+
+If you were using the `.inputFile` and `.outputFile` options, this is now done by [configuring the output paths](http://www.ember-cli.com/#configuring-output-paths) in your `Brocfile.js`
 
 ## Example
 
