@@ -14,14 +14,17 @@ By default this addon will compile `app/styles/app.scss` into `dist/assets/app.c
 a source map for your delectation.
 
 Or, if you want more control then you can specify options using the
-`sassOptions` config property in `config/environment.js`:
+`sassOptions` config property in the Brocfile:
 
 ```javascript
-ENV.sassOptions =  {...}
+var app = new EmberApp({
+  sassOptions: {...}
+});
 ```
 
 - `.includePaths`: an array of include paths
-- `.sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
+- `.sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. 
+  The sourceMap file will be saved to `options.outputFile + '.map'`
 - `.ext`: the extension to look for, defaults to `scss`
 - See [broccoli-sass](https://github.com/joliss/broccoli-sass) for a list of other supported options.
 
@@ -44,7 +47,7 @@ var app = new EmberApp({
 
 ### Upgrading from a previous version
 
-In previous versions the `sassOptions` config property could be added to the `EmberApp` constructor in `Brocfile.js`, although this is still supported it is recommended to use the above usage.
+In a previous versions the `sassOptions` config property was incorrectly moved to the `config/environment.js` file. This usage is deprecated, and you should specify the config in the Brocfile.
 
 If you were using the `.inputFile` and `.outputFile` options, this is now done by [configuring the output paths](http://www.ember-cli.com/#configuring-output-paths) in your `Brocfile.js`
 
@@ -58,15 +61,16 @@ Install some SASS:
 bower install --save foundation
 ```
 
-Specify some include paths in `config/environment.js`:
+Specify some include paths in your Brocfile:
 
 ```javascript
-
-ENV.sassOptions = {
-  includePaths: [
-    'bower_components/foundation/scss'
-  ]
-}
+var app = new EmberApp({
+  sassOptions = {
+    includePaths: [
+      'bower_components/foundation/scss'
+    ]
+  }
+});
 ```
 
 Import some deps into your app.scss:

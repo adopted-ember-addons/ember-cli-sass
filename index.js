@@ -38,12 +38,18 @@ module.exports = {
   sassOptions: function () {
     var env  = process.env.EMBER_ENV;
     var options = (this.app && this.app.options.sassOptions) || {};
+    var envConfig = this.project.config(env).sassOptions;
+    if (envConfig) {
+      console.warn("Deprecation warning: sassOptions should be moved to your Brocfile");
+      merge(options, envConfig);
+    }
 
     if ((options.sourceMap === undefined) && (env == 'development')) {
       options.sourceMap = true;
     }
 
     if (options.sourceMap || options.sourceMapEmbed) {
+      // we need to embed the sourcesContent in the source map until libsass has better support for broccoli-sass
       options.sourceMapContents = true;
     }
 
@@ -60,7 +66,7 @@ module.exports = {
   },
 
   included: function included(app) {
-    this.app = app; // used to provide back-compat for ember-cli < 0.2.0 in sassOptions()
+    this.app = app;
     this._super.included.apply(this, arguments);
 
     if (this.shouldSetupRegistryInIncluded()) {
