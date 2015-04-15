@@ -10,7 +10,7 @@ npm install --save-dev ember-cli-sass
 
 ## Usage
 
-By default this addon will compile `app/styles/app.scss` into `dist/assets/app.css` and produce 
+By default this addon will compile `app/styles/app.scss` or `app/styles/app.sass` into `dist/assets/app.css` and produce 
 a source map for your delectation.
 
 Or, if you want more control then you can specify options using the
@@ -22,7 +22,6 @@ ENV.sassOptions =  {...}
 
 - `.includePaths`: an array of include paths
 - `.sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
-- `.ext`: the extension to look for, defaults to `scss`
 - See [broccoli-sass](https://github.com/joliss/broccoli-sass) for a list of other supported options.
 
 ### Processing multiple files

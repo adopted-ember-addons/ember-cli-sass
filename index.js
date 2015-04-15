@@ -17,13 +17,12 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, options) {
   options = merge({}, this.options, options);
 
   var paths = options.outputPaths;
-  var ext = options.ext || 'scss';
   var trees = [tree];
 
   if (options.includePaths) trees = trees.concat(options.includePaths);
 
   trees = Object.keys(paths).map(function(file) {
-    var input = path.join(inputPath, file + '.' + ext);
+    var input = path.join(inputPath, file);
     var output = paths[file];
 
     return new SassCompiler(trees, input, output, options);
