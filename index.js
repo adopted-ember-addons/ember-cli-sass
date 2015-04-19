@@ -3,6 +3,7 @@ var path = require('path');
 var checker = require('ember-cli-version-checker');
 var mergeTrees = require('broccoli-merge-trees');
 var merge = require('merge');
+var fs = require('fs');
 
 function SASSPlugin(optionsFn) {
   this.name = 'ember-cli-sass';
@@ -13,13 +14,17 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
   var options = merge({}, this.optionsFn(), inputOptions);
 
   var paths = options.outputPaths;
-  var ext = options.ext || 'scss';
   var trees = [tree];
 
   if (options.includePaths) trees = trees.concat(options.includePaths);
 
   trees = Object.keys(paths).map(function(file) {
-    var input = path.join(inputPath, file + '.' + ext);
+    var input = path.join(inputPath, file + '.scss');
+    // If .scss isn't found, try with .sass
+    if (!fs.existsSync('.' + input)) {
+      input = path.join(inputPath, file + '.sass');
+    }
+
     var output = paths[file];
 
     return new SassCompiler(trees, input, output, options);
