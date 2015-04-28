@@ -63,7 +63,7 @@ Specify some include paths in your Brocfile:
 
 ```javascript
 var app = new EmberApp({
-  sassOptions = {
+  sassOptions: {
     includePaths: [
       'bower_components/foundation/scss'
     ]
