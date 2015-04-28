@@ -80,20 +80,18 @@ Import some deps into your app.scss:
 
 ## Addon Usage
 
-To compile sass within an addon, there are a few additional steps:
+To compile SASS within an ember-cli addon, there are a few additional steps:
 
 1. Include your styles in `addon/styles/addon.scss`.
 
 2. Ensure you've installed `ember-cli-sass` under `dependencies` in your
-   `package.json`. If you don't do this, it won't even try to compile
-   your sass.
+   `package.json`.
 
 3. Define an `included` function in your app:
    ```js
    // in your index.js
    module.exports = {
      name: 'my-addon',
-
      included: function(app) {
        this._super.included(app);
      }
@@ -113,9 +111,8 @@ To compile sass within an addon, there are a few additional steps:
    should appear correctly in `dist/assets/vendor.css`
 
 For an example of an addon that does this correctly, see
-[ember-cli-notifications][ember-cli-notifications]
+[ember-cli-notifications](https://github.com/Blooie/ember-cli-notifications)
 
-[ember-cli-notifications]: https://github.com/Blooie/ember-cli-notifications[
 ## Source Maps
 
 Be aware that there are [some issues with source maps](https://github.com/joliss/broccoli-sass/issues/39) in broccoli-sass. The source maps it generates will at least show you the source file names and line number in your dev tools. When we've got a better solution in broccoli-sass you'll be able to click through to view and update the SASS files in the dev tools \o/.
