@@ -13,22 +13,23 @@ function SASSPlugin(optionsFn) {
 SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions) {
   var options = merge({}, this.optionsFn(), inputOptions);
 
-  var paths = options.outputPaths;
-  var trees = [tree];
-
-  if (options.includePaths) trees = trees.concat(options.includePaths);
-
-  trees = Object.keys(paths).map(function(file) {
-    var input = path.join(inputPath, file + '.scss');
-    // If .scss isn't found, try with .sass
-    if (!fs.existsSync('.' + input)) {
-      input = path.join(inputPath, file + '.sass');
+  var inputTrees = [tree];
+  if (options.includePaths) {
+    inputTrees = inputTrees.concat(options.includePaths);
+  }
+  var trees = Object.keys(options.outputPaths).reduce(function(trees, file) {
+    var input = tryFile(file + '.scss') || tryFile(file + '.sass');
+    var output = options.outputPaths[file];
+    if (input) {
+      trees.push(new SassCompiler(inputTrees, input, output, options));
     }
+    return trees;
+  }, []);
 
-    var output = paths[file];
-
-    return new SassCompiler(trees, input, output, options);
-  });
+  function tryFile(file) {
+    var filePath = path.join('.', inputPath, file);
+    return fs.existsSync(filePath) ? filePath : false;
+  }
 
   return mergeTrees(trees);
 };
