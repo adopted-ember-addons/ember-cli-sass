@@ -24,7 +24,7 @@ var app = new EmberApp({
 
 - `.includePaths`: an array of include paths
 - `.sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
-- `.extension`: optionally specify the file extension for the input files. If not specified then the filesystem is checked for the existence of an `scss` or `sass` file
+- `.extension`: optionally specify the file extension for the input files. If not specified then the filesystem is checked for the existence of an `scss` or `sass` file. Please note that, at this point in time, you must specify this option when using ember-cli-sass inside an addon
 - See [broccoli-sass-source-maps](https://github.com/joliss/broccoli-sass-source-maps) for a list of other supported options.
 
 ### Processing multiple files
