@@ -18,7 +18,13 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
     inputTrees = inputTrees.concat(options.includePaths);
   }
   var trees = Object.keys(options.outputPaths).reduce(function(trees, file) {
-    var input = tryFile(file + '.scss') || tryFile(file + '.sass');
+    var input;
+    if (options.extension) {
+      input = path.join('.', inputPath, file + '.' + options.extension);
+    }
+    else {
+      input = tryFile(file + '.scss') || tryFile(file + '.sass');
+    }
     var output = options.outputPaths[file];
     if (input) {
       trees.push(new SassCompiler(inputTrees, input, output, options));
