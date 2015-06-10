@@ -27,12 +27,17 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
     }
     var output = options.outputPaths[file];
     if (input) {
+      // the includePaths on addon point to addon/styles
+      input = input.replace('addon/styles/', '')
       trees.push(new SassCompiler(inputTrees, input, output, options));
     }
     return trees;
   }, []);
 
   function tryFile(file) {
+    // When ember-cli preprocess addon style the inputPath is '/',
+    // add the '/addon/styles' to try found addon sass files
+    if(inputPath === "/") { inputPath = "/addon/styles" }
     var filePath = path.join('.', inputPath, file);
     return fs.existsSync(filePath) ? filePath : false;
   }
