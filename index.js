@@ -5,10 +5,6 @@ var mergeTrees = require('broccoli-merge-trees');
 var merge = require('merge');
 var fs = require('fs');
 
-function isAddonTree(inputPath) {
-  return inputPath === "/";
-}
-
 function SASSPlugin(optionsFn) {
   this.name = 'ember-cli-sass';
   this.optionsFn = optionsFn;
@@ -32,17 +28,18 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
     var output = options.outputPaths[file];
     if (input) {
       // the includePaths on addon point to addon/styles, input should be relative to includePaths
-      if(isAddonTree(inputPath)) { input = input.replace(tree + "/", '') }
+      if(isAddonTree(inputPath)) {
+        input = input.replace(tree + "/", '')
+      }
       trees.push(new SassCompiler(inputTrees, input, output, options));
     }
     return trees;
   }, []);
 
   function tryFile(file) {
-    var root;
     // When ember-cli preprocess addon style the inputPath is '/',
     // add the '/addon/styles' to try found addon sass files
-    if(isAddonTree(inputPath)) { root = tree } else { root = "." }
+    var root = isAddonTree(inputPath) ? tree : ".";
     var filePath = path.join(root, inputPath, file);
     return fs.existsSync(filePath) ? filePath : false;
   }
@@ -96,3 +93,7 @@ module.exports = {
     }
   }
 };
+
+function isAddonTree(inputPath) {
+  return inputPath === "/";
+}
