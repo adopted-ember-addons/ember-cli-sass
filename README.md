@@ -1,6 +1,12 @@
 # ember-cli-sass
 
-Use node-sass to preprocess your ember-cli app's files, with support for source maps and include paths.
+
+ember-cli-sass uses libsass to preprocess your ember-cli app's files and provides support for source maps and include paths. It provides support for the common use case for Ember.js projects:
+
+- Source maps by default in development
+- Support for [`outputPaths` configuration](http://www.ember-cli.com/#configuring-output-paths)
+- Detects whether to use .scss or .sass file extensions
+- Provides the ability to specify include paths
 
 ## Installation
 
