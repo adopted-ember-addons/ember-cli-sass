@@ -54,7 +54,7 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
 
     // Convert the (possibly) absolute path to a relative path expected by
     // `broccoli-sass-source-maps`
-    return filePath.replace(treeString + '/', '');
+    return path.relative(treeString, filePath);
   }
 
   return mergeTrees(trees);
