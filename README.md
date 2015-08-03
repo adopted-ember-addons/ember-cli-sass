@@ -19,8 +19,8 @@ npm install --save-dev ember-cli-sass
 By default this addon will compile `app/styles/app.scss` or `app/styles/app.sass` into `dist/assets/app.css` and produce 
 a source map for your delectation.
 
-Or, if you want more control then you can specify options using the
-`sassOptions` config property in the Brocfile:
+If you want more control then you can specify options using the
+`sassOptions` config property in `ember-cli-build.js` (or in `Brocfile.js` if you are using an Ember CLI version older than 1.13):
 
 ```javascript
 var app = new EmberApp({
@@ -35,7 +35,7 @@ var app = new EmberApp({
 
 ### Processing multiple files
 
-If you need to process multiple files, it can be done by [configuring the output paths](http://www.ember-cli.com/#configuring-output-paths) in your `Brocfile.js`:
+If you need to process multiple files, it can be done by [configuring the output paths](http://www.ember-cli.com/#configuring-output-paths) in your `ember-cli-build.js`:
 
 ```js
 var app = new EmberApp({
@@ -52,9 +52,11 @@ var app = new EmberApp({
 
 ### Upgrading from a previous version
 
-In a previous versions the `sassOptions` config property was incorrectly moved to the `config/environment.js` file. This usage is deprecated, and you should specify the config in the Brocfile.
+In a previous versions the `sassOptions` config property was incorrectly moved to the `config/environment.js` file. This usage is deprecated, and you should specify the config in the `ember-cli-build.js`.
 
-If you were using the `.inputFile` and `.outputFile` options, this is now done by [configuring the output paths](http://www.ember-cli.com/#configuring-output-paths) in your `Brocfile.js`
+In versions of Ember CLI before 1.13 the `sassOptions` config property was placed in `Brocfile.js`, this has since been deprecated. If you are upgrading from an older verion of Ember CLI move your `sassOptions` to `ember-cli-build.js` and remove your Brocfile. For more information check out the [Ember CLI Brocfile transition guide](https://github.com/ember-cli/ember-cli/blob/master/TRANSITION.md#brocfile-transition).
+
+If you were using the `.inputFile` and `.outputFile` options, this is now done by [configuring the output paths](http://www.ember-cli.com/#configuring-output-paths) in your `ember-cli-build.js`
 
 ## Example
 
@@ -66,7 +68,7 @@ Install some SASS:
 bower install --save foundation
 ```
 
-Specify some include paths in your Brocfile:
+Specify some include paths in your `ember-cli-build.js`:
 
 ```javascript
 var app = new EmberApp({
