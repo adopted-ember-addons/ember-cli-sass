@@ -22,9 +22,9 @@ var app = new EmberApp({
 });
 ```
 
-- `.includePaths`: an array of include paths
-- `.sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
-- `.extension`: optionally specify the file extension for the input files. If not specified then the filesystem is checked for the existence of an `scss` or `sass` file. Please note that, at this point in time, you must specify this option when using ember-cli-sass inside an addon
+- `includePaths`: an array of include paths
+- `sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
+- `extension`: optionally specify the file extension for the input files. If not specified then the filesystem is checked for the existence of an `scss` or `sass` file
 - See [broccoli-sass-source-maps](https://github.com/joliss/broccoli-sass-source-maps) for a list of other supported options.
 
 ### Processing multiple files
@@ -44,11 +44,16 @@ var app = new EmberApp({
 });
 ```
 
+### Using in addons
+
+Please be advised that you will need to specify the `extension` option when using ember-cli-sass 
+inside an addon (eg. to generate the `dummy.css` for the dummy app).
+
 ### Upgrading from a previous version
 
 In a previous versions the `sassOptions` config property was incorrectly moved to the `config/environment.js` file. This usage is deprecated, and you should specify the config in the Brocfile.
 
-If you were using the `.inputFile` and `.outputFile` options, this is now done by [configuring the output paths](http://www.ember-cli.com/#configuring-output-paths) in your `Brocfile.js`
+If you were using the `inputFile` and `outputFile` options, this is now done by [configuring the output paths](http://www.ember-cli.com/#configuring-output-paths) in your `Brocfile.js`
 
 ## Example
 
