@@ -45,6 +45,14 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
      */
     var treeString = tree.read ? tree.read() : tree;
 
+    /**
+     * When tree is a 'TreeMerger (stylesAndVendor)'
+     * the 'read' returns a object, so use the a relative treeString(.)
+     */
+    if(typeof treeString !== "string") {
+      treeString = "."
+    }
+
     // When ember-cli preprocess addon style the inputPath is '/',
     // add the '/addon/styles' to try found addon sass files
     var root = (inputPath === '/') ? treeString : '.';
