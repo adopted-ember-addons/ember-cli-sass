@@ -33,22 +33,18 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
   }, []);
 
   function tryFile(file) {
-    /**
-     * `ember-cli` passes different `tree` as the parameter to `toTree()`.
-     *
-     * When building an addon that directly uses `ember-cli-sass`, `tree` is a
-     * `String` that contains `"/path/to/your/addon-name/addon/styles"`.
-     *
-     * When building an hosting app that indirectly uses `ember-cli-sass`
-     * through an addon, `tree` is an object with a `read()` function that
-     * returns `"/path/to/your/addon-name/addon/styles"`.
-     */
+    // `ember-cli` passes different `tree` as the parameter to `toTree()`.
+    //
+    // When building an addon that directly uses `ember-cli-sass`, `tree` is a
+    // `String` that contains `"/path/to/your/addon-name/addon/styles"`.
+    //
+    // When building an hosting app that indirectly uses `ember-cli-sass`
+    // through an addon, `tree` is an object with a `read()` function that
+    // returns `"/path/to/your/addon-name/addon/styles"`.
     var treeString = tree.read ? tree.read() : tree;
 
-    /**
-     * When tree is a 'TreeMerger (stylesAndVendor)'
-     * the 'read' returns a object, so use the a relative treeString(.)
-     */
+    // When tree is a 'TreeMerger (stylesAndVendor)'
+    // the 'read' returns a object, so use the a relative treeString(.)
     if(typeof treeString !== "string") {
       treeString = "."
     }
