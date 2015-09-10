@@ -52,8 +52,15 @@ var app = new EmberApp({
 
 ### Using in addons
 
-Please be advised that you will need to specify the `extension` option when using ember-cli-sass 
-inside an addon (eg. to generate the `dummy.css` for the dummy app).
+To use `ember-cli-sass` for an addon's dummy app, explicitly specify the `extension` option in your `ember-cli-build.js`:
+
+```js
+var app = new EmberApp(defaults, {
+ sassOptions: {
+  extension: 'scss', // or sass
+  }
+});
+```
 
 ### Upgrading from a previous version
 
