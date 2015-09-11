@@ -52,7 +52,7 @@ module.exports = {
     var options = (this.app && this.app.options.sassOptions) || {};
     var envConfig = this.project.config(env).sassOptions;
     if (envConfig) {
-      console.warn("Deprecation warning: sassOptions should be moved to your Brocfile");
+      console.warn("Deprecation warning: sassOptions should be moved to your ember-cli-build");
       merge(options, envConfig);
     }
 
