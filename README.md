@@ -56,8 +56,8 @@ To use `ember-cli-sass` for an addon's dummy app, explicitly specify the `extens
 
 ```js
 var app = new EmberApp(defaults, {
- sassOptions: {
-  extension: 'scss' // or sass
+  sassOptions: {
+    extension: 'scss' // or sass
   }
 });
 ```
