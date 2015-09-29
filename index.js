@@ -33,8 +33,32 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
   }, []);
 
   function tryFile(file) {
-    var filePath = path.join('.', inputPath, file);
-    return fs.existsSync(filePath) ? filePath : false;
+    // `ember-cli` passes different `tree` as the parameter to `toTree()`.
+    //
+    // When building an addon that directly uses `ember-cli-sass`, `tree` is a
+    // `String` that contains `"/path/to/your/addon-name/addon/styles"`.
+    //
+    // When building an hosting app that indirectly uses `ember-cli-sass`
+    // through an addon, `tree` is an object with a `read()` function that
+    // returns `"/path/to/your/addon-name/addon/styles"`.
+    var treeString = tree.read ? tree.read() : tree;
+
+    // When tree is a 'TreeMerger (stylesAndVendor)'
+    // the 'read' returns a object, so use the a relative treeString(.)
+    if(typeof treeString !== "string") {
+      treeString = "."
+    }
+
+    // When ember-cli preprocess addon style the inputPath is '/',
+    // add the '/addon/styles' to try found addon sass files
+    var root = (inputPath === '/') ? treeString : '.';
+    var filePath = path.join(root, inputPath, file);
+
+    if (!fs.existsSync(filePath)) return false;
+
+    // Convert the (possibly) absolute path to a relative path expected by
+    // `broccoli-sass-source-maps`
+    return path.relative(treeString, filePath);
   }
 
   return mergeTrees(trees);
