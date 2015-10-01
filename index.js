@@ -17,25 +17,14 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
   if (options.includePaths) {
     inputTrees = inputTrees.concat(options.includePaths);
   }
-  var trees = Object.keys(options.outputPaths).reduce(function(trees, file) {
-    var input;
-    if (options.extension) {
-      input = path.join('.', inputPath, file + '.' + options.extension);
-    }
-    else {
-      input = tryFile(file + '.scss') || tryFile(file + '.sass');
-    }
-    var output = options.outputPaths[file];
-    if (input) {
-      trees.push(new SassCompiler(inputTrees, input, output, options));
-    }
-    return trees;
-  }, []);
 
-  function tryFile(file) {
-    var filePath = path.join('.', inputPath, file);
-    return fs.existsSync(filePath) ? filePath : false;
-  }
+  var ext = options.extension || 'scss';
+  var paths = options.outputPaths;
+  var trees = Object.keys(paths).map(function(file) {
+    var input = path.join(inputPath, file + '.' + ext);
+    var output = paths[file];
+    return new SassCompiler(inputTrees, input, output, options);
+  });
 
   return mergeTrees(trees);
 };
