@@ -30,7 +30,7 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
 };
 
 module.exports = {
-  name:  'Ember CLI SASS',
+  name:  'ember-cli-sass',
 
   shouldSetupRegistryInIncluded: function() {
     return !checker.isAbove(this, '0.2.0');
