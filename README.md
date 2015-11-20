@@ -1,5 +1,8 @@
 # ember-cli-sass
 
+[![npm version](https://badge.fury.io/js/ember-cli-sass.svg)](http://badge.fury.io/js/ember-cli-sass)
+[![Ember Observer Score](http://emberobserver.com/badges/ember-cli-sass.svg)](http://emberobserver.com/addons/ember-cli-sass)
+[![Dependency Status](https://david-dm.org/aexmachina/ember-cli-sass.svg)](https://david-dm.org/aexmachina/ember-cli-sass)
 
 ember-cli-sass uses libsass to preprocess your ember-cli app's files and provides support for source maps and include paths. It provides support for the common use case for Ember.js projects:
 
