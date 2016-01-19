@@ -18,7 +18,7 @@ npm install --save-dev ember-cli-sass
 
 ## Usage
 
-By default this addon will compile `app/styles/app.scss` or `app/styles/app.sass` into `dist/assets/app.css` and produce 
+By default this addon will compile `app/styles/app.scss` into `dist/assets/app.css` and produce 
 a source map for your delectation.
 
 If you want more control then you can specify options using the
