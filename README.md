@@ -32,7 +32,7 @@ var app = new EmberApp({
 
 - `includePaths`: an array of include paths
 - `sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
-- `extension`: specifies the file extension for the input files, defaults to `scss`
+- `extensions`: specifies the file extensions for the input files, defaults to `['scss', 'sass']`
 - See [broccoli-sass-source-maps](https://github.com/aexmachina/broccoli-sass-source-maps) for a list of other supported options.
 
 ### Processing multiple files
