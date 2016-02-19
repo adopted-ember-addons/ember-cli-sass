@@ -38,7 +38,7 @@ module.exports = {
 
   sassOptions: function () {
     var env  = process.env.EMBER_ENV;
-    var options = (this.app && this.app.options.sassOptions) || {};
+    var options = (this.app && this.app.options && this.app.options.sassOptions) || {};
     var envConfig = this.project.config(env).sassOptions;
     if (envConfig) {
       console.warn("Deprecation warning: sassOptions should be moved to your ember-cli-build");
@@ -67,8 +67,14 @@ module.exports = {
   },
 
   included: function included(app) {
-    this.app = app;
     this._super.included.apply(this, arguments);
+
+    // see: https://github.com/ember-cli/ember-cli/issues/3718
+    if (typeof app.import !== 'function' && app.app) {
+      app = app.app;
+    }
+
+    this.app = app;
 
     if (this.shouldSetupRegistryInIncluded()) {
       this.setupPreprocessorRegistry('parent', app.registry);
