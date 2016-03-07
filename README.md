@@ -13,7 +13,7 @@ ember-cli-sass uses libsass to preprocess your ember-cli app's files and provide
 ## Installation
 
 ```
-npm install --save-dev ember-cli-sass
+ember install ember-cli-sass
 ```
 
 ## Usage
