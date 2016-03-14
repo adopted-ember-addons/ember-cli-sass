@@ -7,7 +7,7 @@
 ember-cli-sass uses libsass to preprocess your ember-cli app's files and provides support for source maps and include paths. It provides support for the common use case for Ember.js projects:
 
 - Source maps by default in development
-- Support for [`outputPaths` configuration](http://www.ember-cli.com/#configuring-output-paths)
+- Support for [`outputPaths` configuration](http://ember-cli.com/user-guide/#configuring-output-paths)
 - Provides the ability to specify include paths
 
 ## Installation
@@ -37,7 +37,7 @@ var app = new EmberApp({
 
 ### Processing multiple files
 
-If you need to process multiple files, it can be done by [configuring the output paths](http://www.ember-cli.com/#configuring-output-paths) in your `ember-cli-build.js`:
+If you need to process multiple files, it can be done by [configuring the output paths](http://ember-cli.com/user-guide/#configuring-output-paths) in your `ember-cli-build.js`:
 
 ```js
 var app = new EmberApp({
@@ -58,7 +58,7 @@ In a previous versions the `sassOptions` config property was incorrectly moved t
 
 In versions of Ember CLI before 1.13 the `sassOptions` config property was placed in `Brocfile.js`, this has since been deprecated. If you are upgrading from an older verion of Ember CLI move your `sassOptions` to `ember-cli-build.js` and remove your Brocfile. For more information check out the [Ember CLI Brocfile transition guide](https://github.com/ember-cli/ember-cli/blob/master/TRANSITION.md#brocfile-transition).
 
-If you were using the `inputFile` and `outputFile` options, this is now done by [configuring the output paths](http://www.ember-cli.com/#configuring-output-paths) in `ember-cli-build.js`.
+If you were using the `inputFile` and `outputFile` options, this is now done by [configuring the output paths](http://ember-cli.com/user-guide/#configuring-output-paths) in `ember-cli-build.js`.
 
 ## Example
 
