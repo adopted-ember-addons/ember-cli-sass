@@ -8,6 +8,7 @@ var fs = require('fs');
 function SASSPlugin(optionsFn) {
   this.name = 'ember-cli-sass';
   this.optionsFn = optionsFn;
+  this.ext = ['scss', 'sass'];
 }
 
 SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions) {
