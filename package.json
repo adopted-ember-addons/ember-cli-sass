@@ -15,6 +15,7 @@
   "dependencies": {
     "broccoli-merge-trees": "^1.1.0",
     "broccoli-sass-source-maps": "^1.4.0",
+    "broccoli-unwatched-tree": "^0.1.1",
     "ember-cli-version-checker": "^1.0.2",
     "merge": "^1.2.0"
   },

@@ -1,6 +1,7 @@
 var SassCompiler = require('broccoli-sass-source-maps');
 var path = require('path');
 var checker = require('ember-cli-version-checker');
+var UnwatchedTree = require('broccoli-unwatched-tree')
 var mergeTrees = require('broccoli-merge-trees');
 var merge = require('merge');
 var fs = require('fs');
@@ -16,7 +17,17 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
 
   var inputTrees = [tree];
   if (options.includePaths) {
-    inputTrees = inputTrees.concat(options.includePaths);
+    inputTrees = inputTrees.concat(options.includePaths.map(function(path) {
+      if (typeof path === 'object') {
+        if (!path.path) throw new Error('sassOptions includePaths must either be an object with a "path" key or a string.')
+        if (path.noWatch) {
+          path = UnwatchedTree(path.path)
+        } else {
+          path = path.path
+        }
+      }
+      return path
+    }));
   }
 
   var ext = options.extension || 'scss';
