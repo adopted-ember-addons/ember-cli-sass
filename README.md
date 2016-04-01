@@ -43,6 +43,20 @@ var app = new EmberApp({
 - `extension`: specifies the file extension for the input files, defaults to `scss`
 - See [broccoli-sass-source-maps](https://github.com/aexmachina/broccoli-sass-source-maps) for a list of other supported options.
 
+### Excluding include paths from watch
+
+If you add a large file tree to includePaths (e.g. node_modules), it may cause startup to slow or hang. To skip watching on an include_path, instead of specifying a string, specify an object with a `path` and a `noWatch` key:
+
+```
+var app = new EmberApp({
+  sassOptions: {
+    includePaths: [
+      { path: 'node_modules', noWatch: true }
+    ]
+  }
+});
+```
+
 ### Processing multiple files
 
 If you need to process multiple files, it can be done by [configuring the output paths](http://ember-cli.com/user-guide/#configuring-output-paths) in your `ember-cli-build.js`:
