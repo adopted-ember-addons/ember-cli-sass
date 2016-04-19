@@ -18,7 +18,7 @@ ember install ember-cli-sass
 
 ### Addon Development
 
-If you want to using ember-cli-sass in an addon and you want to distribute the compiled CSS it must be installed as a `dependency` so that `addon/styles/addon.scss` is compiled into `dist/assets/vendor.css`. This can be done using:
+If you want to use ember-cli-sass in an addon and you want to distribute the compiled CSS it must be installed as a `dependency` so that `addon/styles/addon.scss` is compiled into `dist/assets/vendor.css`. This can be done using:
 
 ```bash
 npm install --save ember-cli-sass
