@@ -41,6 +41,7 @@ var app = new EmberApp({
 - `includePaths`: an array of include paths
 - `sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
 - `extension`: specifies the file extension for the input files, defaults to `scss`
+- `nodeSass`: Allows a different version of [node-sass](https://www.npmjs.com/package/node-sass) to be used (see below)
 - See [broccoli-sass-source-maps](https://github.com/aexmachina/broccoli-sass-source-maps) for a list of other supported options.
 
 ### Processing multiple files
@@ -56,6 +57,22 @@ var app = new EmberApp({
         'themes/alpha': '/assets/themes/alpha.css'
       }
     }
+  }
+});
+```
+
+### Choosing the version of node-sass
+
+You can specify which version of node-sass to use with the [`nodeSass` option](https://github.com/aexmachina/broccoli-sass-source-maps#usage). 
+
+Add the version that you want to use to _your_ package.json and then provide that version of the module using the `nodeSass` option:
+
+```js
+var nodeSass = require('node-sass'); // loads the version in your package.json
+
+var app = new EmberApp({
+  sassOptions: {
+    nodeSass: nodeSass
   }
 });
 ```
