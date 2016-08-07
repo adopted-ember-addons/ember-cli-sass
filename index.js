@@ -56,6 +56,7 @@ module.exports = {
     }
 
     options.outputFile = options.outputFile || this.project.name() + '.css';
+    options.sourceMapRoot = path.join(this.app.project.root, 'app/styles');
 
     return options;
   },
