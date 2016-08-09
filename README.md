@@ -149,6 +149,14 @@ To compile SASS within an ember-cli addon, there are a few additional steps:
 For an example of an addon that does this correctly, see
 [ember-cli-notifications](https://github.com/Blooie/ember-cli-notifications)
 
+## Alternative Addon Usage
+
+As an alternative to the above, some addons choose to require the consuming app uses SASS. This has the advantage of easily allowing users to override your SASS variables. The alternative steps are:
+
+1. Instead of including your styles in `addon/styles/addon.scss` instead place them in `app/styles/your-addon-name.scss`. Document that your user can now add `@import 'your-addon-name';` to their `app.scss` file. In the lines before this import they can choose to override any variables your addon marks with [default](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#variable_defaults_).
+
+2. Ensure steps 2, 3 and 4 are completed as per the standard addon usage section above.
+
 ## Source Maps
 
 Be aware that there are [some issues with source maps](https://github.com/joliss/broccoli-sass/issues/39) in broccoli-sass. The source maps it generates will at least show you the source file names and line number in your dev tools. When we've got a better solution in broccoli-sass you'll be able to click through to view and update the SASS files in the dev tools \o/.
