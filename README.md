@@ -9,6 +9,7 @@ ember-cli-sass uses libsass to preprocess your ember-cli app's files and provide
 - Source maps by default in development
 - Support for [`outputPaths` configuration](http://ember-cli.com/user-guide/#configuring-output-paths)
 - Provides the ability to specify include paths
+- Edit SASS in Chrome Dev Tools
 
 ## Installation
 
@@ -26,7 +27,7 @@ npm install --save ember-cli-sass
 
 ## Usage
 
-By default this addon will compile `app/styles/app.scss` into `dist/assets/app.css` and produce 
+By default this addon will compile `app/styles/app.scss` into `dist/assets/app.css` and produce
 a source map for your delectation.
 
 If you want more control then you can specify options using the
@@ -63,7 +64,7 @@ var app = new EmberApp({
 
 ### Choosing the version of node-sass
 
-You can specify which version of node-sass to use with the [`nodeSass` option](https://github.com/aexmachina/broccoli-sass-source-maps#usage). 
+You can specify which version of node-sass to use with the [`nodeSass` option](https://github.com/aexmachina/broccoli-sass-source-maps#usage).
 
 Add the version that you want to use to _your_ package.json and then provide that version of the module using the `nodeSass` option:
 
@@ -76,6 +77,18 @@ var app = new EmberApp({
   }
 });
 ```
+
+### Source Maps
+
+Source maps work for reading with no configuration, but to edit the SASS in the Dev Tools
+you need to configure your Workspace:
+
+1. Open app.scss in Dev Tools (you can use ⌘P and search for "app.scss")
+1. Right click in the Sources panel on the right of the Sources tab and
+  select _Add Folder to Workspace_
+1. Select the root directory of your project
+1. Right click on app.scss and select _Map to File System Resource..._
+1. Select app.scss from your project directory
 
 ### Upgrading from a previous version
 
@@ -133,7 +146,7 @@ To compile SASS within an ember-cli addon, there are a few additional steps:
      }
    };
    ```
-   
+
    If you omit this step, it will throw the following error:
    ```
    Cannot read property 'sassOptions' of undefined
@@ -151,12 +164,13 @@ For an example of an addon that does this correctly, see
 
 ## Alternative Addon Usage
 
-As an alternative to the above, some addons choose to require the consuming app uses SASS. This has the advantage of easily allowing users to override your SASS variables. The alternative steps are:
+As an alternative to the above, some addons may choose to allow their SASS to be  used in
+the parent app, rather than the compiled CSS. This has the advantage of easily allowing
+users to use and override your SASS. The steps for this setup are as follows:
 
-1. Instead of including your styles in `addon/styles/addon.scss` instead place them in `app/styles/your-addon-name.scss`. Document that your user can now add `@import 'your-addon-name';` to their `app.scss` file. In the lines before this import they can choose to override any variables your addon marks with [default](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#variable_defaults_).
-
+1. Instead of including your styles in `addon/styles/addon.scss`, place them in
+  `app/styles/your-addon-name.scss`. Document that your user can now add
+  `@import 'your-addon-name';` to their `app.scss` file. In the lines before this import
+  they can choose to override any variables your addon marks with
+  [default](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#variable_defaults_).
 2. Ensure steps 2, 3 and 4 are completed as per the standard addon usage section above.
-
-## Source Maps
-
-Be aware that there are [some issues with source maps](https://github.com/joliss/broccoli-sass/issues/39) in broccoli-sass. The source maps it generates will at least show you the source file names and line number in your dev tools. When we've got a better solution in broccoli-sass you'll be able to click through to view and update the SASS files in the dev tools \o/.
