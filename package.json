@@ -2,25 +2,56 @@
   "name": "ember-cli-sass",
   "version": "5.5.1",
   "description": "Use node-sass to preprocess your ember-cli app's files, with support for sourceMaps and include paths",
-  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "ember build",
+    "start": "ember server",
+    "test": "ember try:each"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aexmachina/ember-cli-sass.git"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "author": "@aexmachina",
+  "license": "MIT",
+  "devDependencies": {
+    "broccoli-asset-rev": "^2.4.2",
+    "ember-cli": "2.7.0",
+    "ember-cli-app-version": "^1.0.0",
+    "ember-cli-dependency-checker": "^1.2.0",
+    "ember-cli-htmlbars": "^1.0.3",
+    "ember-cli-htmlbars-inline-precompile": "^0.3.1",
+    "ember-cli-inject-live-reload": "^1.4.0",
+    "ember-cli-jshint": "^1.0.0",
+    "ember-cli-qunit": "^2.0.0",
+    "ember-cli-release": "^0.2.9",
+    "ember-cli-sri": "^2.1.0",
+    "ember-cli-test-loader": "^1.1.0",
+    "ember-cli-uglify": "^1.2.0",
+    "ember-disable-prototype-extensions": "^1.1.0",
+    "ember-export-application-global": "^1.0.5",
+    "ember-load-initializers": "^0.5.1",
+    "ember-resolver": "^2.0.3",
+    "loader.js": "^4.0.1"
   },
   "keywords": [
     "ember-addon",
     "sass"
   ],
-  "author": "@aexmachina",
-  "license": "MIT",
   "dependencies": {
     "broccoli-merge-trees": "^1.1.0",
     "broccoli-sass-source-maps": "^1.8.0",
     "ember-cli-version-checker": "^1.0.2",
     "merge": "^1.2.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/aexmachina/ember-cli-sass.git"
+  "ember-addon": {
+    "configPath": "tests/dummy/config"
   },
   "bugs": {
     "url": "https://github.com/aexmachina/ember-cli-sass/issues"
