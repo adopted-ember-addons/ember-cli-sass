@@ -1,6 +1,7 @@
 # ember-cli-sass
 
-[![npm version](https://badge.fury.io/js/ember-cli-sass.svg)](http://badge.fury.io/js/ember-cli-sass)
+[![npm version](https://badge.fury.io/js/ember-cli-sass.svg)](https://www.npmjs.com/package/ember-cli-sass)
+[![Tests](https://travis-ci.org/aexmachina/ember-cli-sass.svg)](https://travis-ci.org/aexmachina/ember-cli-sass)
 [![Ember Observer Score](http://emberobserver.com/badges/ember-cli-sass.svg)](http://emberobserver.com/addons/ember-cli-sass)
 [![Dependency Status](https://david-dm.org/aexmachina/ember-cli-sass.svg)](https://david-dm.org/aexmachina/ember-cli-sass)
 
