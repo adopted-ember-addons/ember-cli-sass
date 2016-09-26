@@ -4,7 +4,19 @@ var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
   var app = new EmberAddon(defaults, {
-    // Add options here
+    outputPaths: {
+      app: {
+        css: {
+          'app': '/assets/dummy.css',
+          'output-path': '/assets/output-path.css'
+        }
+      }
+    },
+    sassOptions: {
+      includePaths: [
+        'bower_components/SpinKit/scss',
+      ]
+    }
   });
 
   /*
