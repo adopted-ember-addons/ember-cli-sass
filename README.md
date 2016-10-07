@@ -142,8 +142,8 @@ To compile SASS within an ember-cli addon, there are a few additional steps:
    // in your index.js
    module.exports = {
      name: 'my-addon',
-     included: function(app) {
-       this._super.included(app);
+     included: function(/* app */) {
+       this._super.included.apply(this, arguments);
      }
    };
    ```
