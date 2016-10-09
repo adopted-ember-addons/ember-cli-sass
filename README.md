@@ -91,14 +91,6 @@ you need to configure your Workspace:
 1. Right click on app.scss and select _Map to File System Resource..._
 1. Select app.scss from your project directory
 
-### Upgrading from a previous version
-
-In a previous versions the `sassOptions` config property was incorrectly moved to the `config/environment.js` file. This usage is deprecated, and you should specify the config in the `ember-cli-build.js`.
-
-In versions of Ember CLI before 1.13 the `sassOptions` config property was placed in `Brocfile.js`, this has since been deprecated. If you are upgrading from an older verion of Ember CLI move your `sassOptions` to `ember-cli-build.js` and remove your Brocfile. For more information check out the [Ember CLI Brocfile transition guide](https://github.com/ember-cli/ember-cli/blob/master/TRANSITION.md#brocfile-transition).
-
-If you were using the `inputFile` and `outputFile` options, this is now done by [configuring the output paths](http://ember-cli.com/user-guide/#configuring-output-paths) in `ember-cli-build.js`.
-
 ## Example
 
 The following example assumes your bower packages are installed into `bower_components/`.
@@ -159,9 +151,6 @@ To compile SASS within an ember-cli addon, there are a few additional steps:
 
 5. If you run `ember build dist`, your styles from `addon/styles/addon.scss`
    should appear correctly in `dist/assets/vendor.css`
-
-For an example of an addon that does this correctly, see
-[ember-cli-notifications](https://github.com/Blooie/ember-cli-notifications)
 
 ## Alternative Addon Usage
 
