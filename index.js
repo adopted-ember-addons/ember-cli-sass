@@ -22,7 +22,8 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
       destDir: 'app/styles',
       annotation: 'Funnel (styles)'
     })];
-  } else {
+  }
+  else {
     inputTrees = [tree];
   }
 
