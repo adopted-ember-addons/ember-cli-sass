@@ -48,9 +48,9 @@
     "sass"
   ],
   "dependencies": {
-    "broccoli-merge-trees": "^1.1.0",
     "broccoli-funnel": "^1.0.0",
-    "broccoli-sass-source-maps": "^1.8.0",
+    "broccoli-merge-trees": "^1.1.0",
+    "broccoli-sass-source-maps": "^2.0.0",
     "ember-cli-babel": "5.1.10",
     "ember-cli-version-checker": "^1.0.2",
     "merge": "^1.2.0"
