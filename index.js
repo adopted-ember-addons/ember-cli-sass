@@ -17,9 +17,8 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
   var inputTrees;
 
   if (options.onlyIncluded) {
-    inputTrees = [new Funnel('app/styles', {
-      srcDir: '/',
-      destDir: 'app/styles',
+    inputTrees = [new Funnel(tree, {
+      include: ['app/styles/**/*'],
       annotation: 'Funnel (styles)'
     })];
   }
