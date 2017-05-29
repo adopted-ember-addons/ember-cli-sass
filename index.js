@@ -51,7 +51,11 @@ module.exports = {
   sassOptions: function () {
     var env  = process.env.EMBER_ENV;
     var options = (this.app && this.app.options && this.app.options.sassOptions) || {};
+    var parentOption = (this.parent && this.parent.app && this.parent.app.options && this.parent.app.options.sassOptions) || {};
     var envConfig = this.project.config(env).sassOptions;
+    
+    merge(options, parentOption);
+    
     if (envConfig) {
       console.warn("Deprecation warning: sassOptions should be moved to your ember-cli-build");
       merge(options, envConfig);
