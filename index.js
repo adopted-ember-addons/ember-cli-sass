@@ -3,7 +3,6 @@ var path = require('path');
 var checker = require('ember-cli-version-checker');
 var Funnel = require('broccoli-funnel');
 var mergeTrees = require('broccoli-merge-trees');
-var merge = require('merge');
 var fs = require('fs');
 
 function SASSPlugin(optionsFn) {
@@ -13,7 +12,7 @@ function SASSPlugin(optionsFn) {
 }
 
 SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions) {
-  var options = merge({}, this.optionsFn(), inputOptions);
+  var options = Object.assign({}, this.optionsFn(), inputOptions);
   var inputTrees;
 
   if (options.onlyIncluded) {
@@ -53,12 +52,12 @@ module.exports = {
     var options = (this.app && this.app.options && this.app.options.sassOptions) || {};
     var parentOption = (this.parent && this.parent.app && this.parent.app.options && this.parent.app.options.sassOptions) || {};
     var envConfig = this.project.config(env).sassOptions;
-    
-    merge(options, parentOption);
-    
+
+    Object.assign(options, parentOption);
+
     if (envConfig) {
       console.warn("Deprecation warning: sassOptions should be moved to your ember-cli-build");
-      merge(options, envConfig);
+      Object.assign(options, envConfig);
     }
 
     if ((options.sourceMap === undefined) && (env == 'development')) {
