@@ -1,3 +1,4 @@
+/* eslint-env node */
 var SassCompiler = require('broccoli-sass-source-maps');
 var path = require('path');
 var checker = require('ember-cli-version-checker');
