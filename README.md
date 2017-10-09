@@ -165,3 +165,46 @@ users to use and override your SASS. The steps for this setup are as follows:
   they can choose to override any variables your addon marks with
   [default](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#variable_defaults_).
 2. Ensure steps 2, 3 and 4 are completed as per the standard addon usage section above.
+
+## Usage within in-repo addon and in-repo engine
+
+To re-use SASS definitions from an in-repo-addon within an in-repo-engine, you
+need to add the in-repo addons' path to the `includePaths`. So basically if you
+have a directory layout like this (where `common` is an in-repo addon):
+
+```
+app
+└── lib
+    ├── my-in-repo-engine
+    │   ├── addon
+    │   │   └── styles
+    │   │       └── addon.scss
+    │   └── index.js
+    └── common
+        └── app
+            └── styles
+                └── common
+                    └── vars.scss
+```
+
+The `app/lib/my-in-repo-engine/index.js` should look like this:
+
+```js
+const EngineAddon = require('ember-engines/lib/engine-addon');
+
+module.exports = EngineAddon.extend({
+
+  sassOptions: {
+    includePaths: ['lib/common/app/styles']
+  },
+
+  ...
+
+};
+```
+
+and then you can include the definitions inside the engines SASS files via:
+
+```scss
+@import "common/vars";
+```
