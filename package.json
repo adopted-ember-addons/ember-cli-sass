@@ -50,7 +50,7 @@
   "dependencies": {
     "broccoli-funnel": "^1.0.0",
     "broccoli-merge-trees": "^1.1.0",
-    "broccoli-sass-source-maps": "^2.0.0",
+    "broccoli-sass-source-maps": "^2.1.0",
     "ember-cli-version-checker": "^1.0.2"
   },
   "ember-addon": {
