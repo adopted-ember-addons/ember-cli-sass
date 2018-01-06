@@ -14,23 +14,20 @@ function SASSPlugin(optionsFn) {
 
 SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions) {
   var options = Object.assign({}, this.optionsFn(), inputOptions);
-  var inputTrees;
-
-  if (options.onlyIncluded) {
-    inputTrees = [new Funnel(tree, {
-      include: ['app/styles/**/*'],
+  var ext = options.extension || 'scss';
+  var inputTrees = [
+    new Funnel(tree, {
+      // Only SASS files within the tree whose names match this expression will be copied,
+      // this avoid unnecessary SASS rebuild in the pipeline.
+      include: [options.onlyIncluded ? 'app/styles/**/*' : '**/*.' + ext],
       annotation: 'Funnel (styles)'
-    })];
-  }
-  else {
-    inputTrees = [tree];
-  }
+    })
+  ];
 
   if (options.includePaths) {
     inputTrees = inputTrees.concat(options.includePaths);
   }
 
-  var ext = options.extension || 'scss';
   var paths = options.outputPaths;
   var trees = Object.keys(paths).map(function(file) {
     var input = path.join(inputPath, file + '.' + ext);
