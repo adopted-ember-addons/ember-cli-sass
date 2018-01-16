@@ -1,7 +1,7 @@
 /* eslint-env node */
 var SassCompiler = require('broccoli-sass-source-maps');
 var path = require('path');
-var checker = require('ember-cli-version-checker');
+var VersionChecker = require('ember-cli-version-checker');
 var Funnel = require('broccoli-funnel');
 var mergeTrees = require('broccoli-merge-trees');
 var fs = require('fs');
@@ -45,7 +45,10 @@ module.exports = {
   name:  'ember-cli-sass',
 
   shouldSetupRegistryInIncluded: function() {
-    return !checker.isAbove(this, '0.2.0');
+    var checker = new VersionChecker(this);
+    var dep = checker.for('ember-cli');
+
+    return !dep.isAbove('0.2.0');
   },
 
   sassOptions: function () {

@@ -25,7 +25,7 @@
     "broccoli-funnel": "^1.0.0",
     "broccoli-merge-trees": "^1.1.0",
     "broccoli-sass-source-maps": "^2.1.0",
-    "ember-cli-version-checker": "^1.0.2"
+    "ember-cli-version-checker": "^2.1.0"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
@@ -34,7 +34,7 @@
     "ember-cli-babel": "^6.6.0",
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-eslint": "^4.2.1",
-    "ember-cli-foundation-6-sass": "0.0.17",
+    "ember-cli-foundation-6-sass": "0.0.24",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
