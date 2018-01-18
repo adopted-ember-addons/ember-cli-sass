@@ -58,7 +58,7 @@ module.exports = {
     Object.assign(options, parentOption);
 
     if (envConfig) {
-      console.warn("Deprecation warning: sassOptions should be moved to your ember-cli-build");
+      console.warn("Deprecation warning: sassOptions should be moved to your ember-cli-build"); // eslint-disable-line
       Object.assign(options, envConfig);
     }
 
