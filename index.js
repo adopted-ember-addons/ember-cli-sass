@@ -1,10 +1,10 @@
+'use strict';
 /* eslint-env node */
 var SassCompiler = require('broccoli-sass-source-maps');
 var path = require('path');
 var VersionChecker = require('ember-cli-version-checker');
 var Funnel = require('broccoli-funnel');
 var mergeTrees = require('broccoli-merge-trees');
-var fs = require('fs');
 
 function SASSPlugin(optionsFn) {
   this.name = 'ember-cli-sass';
