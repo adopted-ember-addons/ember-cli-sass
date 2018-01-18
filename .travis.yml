@@ -3,9 +3,9 @@ language: node_js
 node_js:
   # we recommend testing addons with the same minimum supported node version as Ember CLI
   # so that your addon works for all apps
-  - "6"
+  - "4"
 
-sudo: required
+sudo: false
 dist: trusty
 
 addons:
@@ -14,7 +14,6 @@ addons:
 cache:
   directories:
     - $HOME/.npm
-    - $HOME/.cache # includes bowers cache
 
 env:
   global:
@@ -37,15 +36,11 @@ matrix:
 
 before_install:
   - npm config set spin false
-  - npm install -g npm@4 bower
+  - npm install -g npm@4
   - npm --version
-  - bower --version
-
-install:
-  - npm install
-  - bower install
 
 script:
+  - npm run lint:js
   # Usually, it's ok to finish the test scenario without reverting
   #  to the addon's original dependency state, skipping "cleanup".
   - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --skip-cleanup
