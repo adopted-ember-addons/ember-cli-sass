@@ -44,6 +44,7 @@ var app = new EmberApp({
 - `onlyIncluded`: true/false whether to use only what is in `app/styles` and `includePaths`. This may helps with performance, particularly when using NPM linked modules
 - `sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
 - `extension`: specifies the file extension for the input files, defaults to `scss`. Set to `sass` if you want to use `.sass` instead.
+- `passthrough`: an optional hash of [broccoli-funnel](https://github.com/broccolijs/broccoli-funnel) configuration for files from the styles tree to be passed through to `dist`
 - `nodeSass`: Allows a different version of [node-sass](https://www.npmjs.com/package/node-sass) to be used (see below)
 - See [broccoli-sass-source-maps](https://github.com/aexmachina/broccoli-sass-source-maps) for a list of other supported options.
 
