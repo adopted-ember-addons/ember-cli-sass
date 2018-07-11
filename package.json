@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-sass",
-  "version": "7.2.0",
-  "description": "Use node-sass to preprocess your ember-cli app's files, with support for sourceMaps and include paths",
+  "version": "8.0.0",
+  "description": "Use Sass to preprocess your ember-cli app's files, with support for sourceMaps and include paths",
   "keywords": [
     "ember-addon",
     "sass"
@@ -25,7 +25,7 @@
   "dependencies": {
     "broccoli-funnel": "^1.0.0",
     "broccoli-merge-trees": "^1.1.0",
-    "broccoli-sass-source-maps": "^2.1.0",
+    "broccoli-sass-source-maps": "^4.0.0",
     "ember-cli-version-checker": "^2.1.0"
   },
   "devDependencies": {
@@ -49,7 +49,8 @@
     "ember-source": "~2.18.0",
     "eslint-plugin-ember": "^5.0.0",
     "eslint-plugin-node": "^5.2.1",
-    "loader.js": "^4.2.3"
+    "loader.js": "^4.2.3",
+    "sass": "^1.3.0"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
