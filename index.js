@@ -1,6 +1,6 @@
 'use strict';
 /* eslint-env node */
-var SassCompiler = require('broccoli-sass-source-maps');
+var SassCompilerFactory = require('broccoli-sass-source-maps');
 var path = require('path');
 var VersionChecker = require('ember-cli-version-checker');
 var Funnel = require('broccoli-funnel');
@@ -30,6 +30,15 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
     inputTrees = inputTrees.concat(options.includePaths);
   }
 
+  if (!options.implementation) {
+    var error = new Error(
+      'sassOptions must have an implementation option. For example:\n' +
+      '  sassOptions: {implementation: require("sass")}');
+    error.type = 'Sass Plugin Error';
+      throw error;
+  }
+
+  var SassCompiler = SassCompilerFactory(options.implementation);
   var ext = options.extension || 'scss';
   var paths = options.outputPaths;
   var trees = Object.keys(paths).map(function(file) {

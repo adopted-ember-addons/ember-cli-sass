@@ -5,7 +5,10 @@
 [![Ember Observer Score](http://emberobserver.com/badges/ember-cli-sass.svg)](http://emberobserver.com/addons/ember-cli-sass)
 [![Dependency Status](https://david-dm.org/aexmachina/ember-cli-sass.svg)](https://david-dm.org/aexmachina/ember-cli-sass)
 
-ember-cli-sass uses libsass to preprocess your ember-cli app's files and provides support for source maps and include paths. It provides support for the common use case for Ember.js projects:
+ember-cli-sass uses [Dart Sass][] or [LibSass][] to preprocess your ember-cli app's files and provides support for source maps and include paths. It provides support for the common use case for Ember.js projects:
+
+[Dart Sass]: https://sass-lang.com/dart-sass
+[LibSass]: https://sass-lang.com/libsass
 
 - Source maps by default in development
 - Support for [`outputPaths` configuration](http://ember-cli.com/user-guide/#configuring-output-paths)
@@ -16,6 +19,7 @@ ember-cli-sass uses libsass to preprocess your ember-cli app's files and provide
 
 ```
 ember install ember-cli-sass
+npm install --save-dev sass # or node-sass to use LibSass
 ```
 
 ### Addon Development
@@ -23,29 +27,35 @@ ember install ember-cli-sass
 If you want to use ember-cli-sass in an addon and you want to distribute the compiled CSS it must be installed as a `dependency` so that `addon/styles/addon.scss` is compiled into `dist/assets/vendor.css`. This can be done using:
 
 ```bash
-npm install --save ember-cli-sass
+npm install --save ember-cli-sass sass
 ```
 
 ## Usage
 
+To use this addon, you must pass a Sass implementation to the `sassOptions`
+config property in `ember-cli-build.js` (or in `Brocfile.js` if you are using an
+Ember CLI version older than 1.13):
+
+```javascript
+var sass = require('sass');
+
+var app = new EmberApp({
+  sassOptions: {
+    implementation: sass
+  }
+});
+```
+
 By default this addon will compile `app/styles/app.scss` into `dist/assets/app.css` and produce
 a source map for your delectation.
 
-If you want more control then you can specify options using the
-`sassOptions` config property in `ember-cli-build.js` (or in `Brocfile.js` if you are using an Ember CLI version older than 1.13):
-
-```javascript
-var app = new EmberApp({
-  sassOptions: {...}
-});
-```
+If you want more control, you can pass additional options to `sassOptions`:
 
 - `includePaths`: an array of include paths
 - `onlyIncluded`: true/false whether to use only what is in `app/styles` and `includePaths`. This may helps with performance, particularly when using NPM linked modules
 - `sourceMap`: controls whether to generate sourceMaps, defaults to `true` in development. The sourceMap file will be saved to `options.outputFile + '.map'`
 - `extension`: specifies the file extension for the input files, defaults to `scss`. Set to `sass` if you want to use `.sass` instead.
 - `passthrough`: an optional hash of [broccoli-funnel](https://github.com/broccolijs/broccoli-funnel) configuration for files from the styles tree to be passed through to `dist`
-- `nodeSass`: Allows a different version of [node-sass](https://www.npmjs.com/package/node-sass) to be used (see below)
 - See [broccoli-sass-source-maps](https://github.com/aexmachina/broccoli-sass-source-maps) for a list of other supported options.
 
 ### Processing multiple files
@@ -61,22 +71,6 @@ var app = new EmberApp({
         'themes/alpha': '/assets/themes/alpha.css'
       }
     }
-  }
-});
-```
-
-### Choosing the version of node-sass
-
-You can specify which version of node-sass to use with the [`nodeSass` option](https://github.com/aexmachina/broccoli-sass-source-maps#usage).
-
-Add the version that you want to use to _your_ package.json and then provide that version of the module using the `nodeSass` option:
-
-```js
-var nodeSass = require('node-sass'); // loads the version in your package.json
-
-var app = new EmberApp({
-  sassOptions: {
-    nodeSass: nodeSass
   }
 });
 ```
@@ -128,8 +122,8 @@ To compile SASS within an ember-cli addon, there are a few additional steps:
 
 1. Include your styles in `addon/styles/addon.scss`.
 
-2. Ensure you've installed `ember-cli-sass` under `dependencies` in your
-   `package.json`.
+2. Ensure you've installed `ember-cli-sass` and either `sass` or `node-sass`
+   under `dependencies` in your `package.json`.
 
 3. Define an `included` function in your app:
    ```js

@@ -2,6 +2,7 @@
 'use strict';
 
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+const sass = require('sass');
 
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
@@ -14,6 +15,7 @@ module.exports = function(defaults) {
       }
     },
     sassOptions: {
+      implementation: sass,
       includePaths: [
         'bower_components/SpinKit/scss',
       ]
