@@ -5,10 +5,9 @@
 [![Ember Observer Score](http://emberobserver.com/badges/ember-cli-sass.svg)](http://emberobserver.com/addons/ember-cli-sass)
 [![Dependency Status](https://david-dm.org/aexmachina/ember-cli-sass.svg)](https://david-dm.org/aexmachina/ember-cli-sass)
 
-ember-cli-sass uses [Dart Sass][] or [LibSass][] to preprocess your ember-cli app's files and provides support for source maps and include paths. It provides support for the common use case for Ember.js projects:
+ember-cli-sass uses [Dart Sass][] to preprocess your ember-cli app's files and provides support for source maps and include paths. It provides support for the common use case for Ember.js projects:
 
 [Dart Sass]: https://sass-lang.com/dart-sass
-[LibSass]: https://sass-lang.com/libsass
 
 - Source maps by default in development
 - Support for [`outputPaths` configuration](http://ember-cli.com/user-guide/#configuring-output-paths)
@@ -19,7 +18,6 @@ ember-cli-sass uses [Dart Sass][] or [LibSass][] to preprocess your ember-cli ap
 
 ```
 ember install ember-cli-sass
-npm install --save-dev sass # or node-sass to use LibSass
 ```
 
 ### Addon Development
@@ -30,18 +28,18 @@ If you want to use ember-cli-sass in an addon and you want to distribute the com
 npm install --save ember-cli-sass sass
 ```
 
-## Usage
+## Using a different Sass implementation
 
-To use this addon, you must pass a Sass implementation to the `sassOptions`
+By default this addon uses a distribution of Dart Sass that is compiled to pure JavaScript, if you would like to use an alternative implementation (e.g. [`node-sass`](https://github.com/sass/node-sass)), you must pass a Sass implementation to the `sassOptions`
 config property in `ember-cli-build.js` (or in `Brocfile.js` if you are using an
 Ember CLI version older than 1.13):
 
 ```javascript
-var sass = require('sass');
+var nodeSass = require('node-sass');
 
 var app = new EmberApp({
   sassOptions: {
-    implementation: sass
+    implementation: nodeSass
   }
 });
 ```

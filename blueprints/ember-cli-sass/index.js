@@ -2,7 +2,7 @@
 module.exports = {
   normalizeEntityName() {}, // no-op since we're just adding dependencies
 
-  afterInstall(options) {
+  afterInstall() {
     return this.addPackageToProject('sass');
   }
 };
