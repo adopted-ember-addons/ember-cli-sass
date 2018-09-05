@@ -31,11 +31,19 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
   }
 
   if (!options.implementation) {
-    var error = new Error(
-      'sassOptions must have an implementation option. For example:\n' +
-      '  sassOptions: {implementation: require("sass")}');
-    error.type = 'Sass Plugin Error';
+    try {
+      // eslint-disable-next-line node/no-unpublished-require
+      options.implementation = require('sass');
+    } catch (e) {
+      var error = new Error(
+        'Could not find the default SASS implementation. Run the default blueprint:\n' +
+        '   ember g ember-cli-sass\n' +
+        'Or install an implementation such as "node-sass" and add an implementation option. For example:\n' +
+        '   sassOptions: {implementation: require("node-sass")}');
+      error.type = 'Sass Plugin Error';
+
       throw error;
+    }
   }
 
   var SassCompiler = SassCompilerFactory(options.implementation);
