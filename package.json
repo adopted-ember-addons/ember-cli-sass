@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-sass",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "description": "Use Sass to preprocess your ember-cli app's files, with support for sourceMaps and include paths",
   "keywords": [
     "ember-addon",
