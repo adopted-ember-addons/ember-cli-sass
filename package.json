@@ -32,7 +32,7 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.7.0",
     "broccoli-clean-css": "^1.1.0",
-    "ember-cli": "~3.3.0",
+    "ember-cli": "^3.4.1",
     "ember-cli-babel": "^6.6.0",
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-eslint": "^4.2.1",
