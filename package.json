@@ -24,8 +24,8 @@
     "lint:js": "eslint ."
   },
   "dependencies": {
-    "broccoli-funnel": "^1.0.0",
-    "broccoli-merge-trees": "^1.1.0",
+    "broccoli-funnel": "^2.0.1",
+    "broccoli-merge-trees": "^3.0.1",
     "broccoli-sass-source-maps": "^4.0.0",
     "ember-cli-version-checker": "^2.1.0"
   },
