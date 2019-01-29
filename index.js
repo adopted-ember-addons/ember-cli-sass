@@ -76,11 +76,10 @@ module.exports = {
 
     // *Either* use the options for an addon which is consuming this, *or* for
     // an app which is consuming this, but never *both* at the same time. The
-    // special case here is `"dummy"`, which only applies when testing an addon.
-    var useApp = this.app.name === 'dummy' || this.app.name === this.project.name();
-    var options = useApp
-      ? (this.app && this.app.options && this.app.options.sassOptions) || {}
-      : (this.parent && this.parent.options && this.parent.options.sassOptions) || {};
+    // special case here is when testing an addon.
+    var options = (this.app && this.app.options && this.app.options.sassOptions)
+      || (this.parent && this.parent.options && this.parent.options.sassOptions)
+      || {};
 
     if (envConfig) {
       console.warn("Deprecation warning: sassOptions should be moved to your ember-cli-build"); // eslint-disable-line
