@@ -72,11 +72,14 @@ module.exports = {
 
   sassOptions: function () {
     var env  = process.env.EMBER_ENV;
-    var options = (this.app && this.app.options && this.app.options.sassOptions) || {};
-    var parentOption = (this.parent && this.parent.app && this.parent.app.options && this.parent.app.options.sassOptions) || {};
     var envConfig = this.project.config(env).sassOptions;
 
-    Object.assign(options, parentOption);
+    // *Either* use the options for an addon which is consuming this, *or* for
+    // an app which is consuming this, but never *both* at the same time. The
+    // special case here is when testing an addon.
+    var options = (this.app && this.app.options && this.app.options.sassOptions)
+      || (this.parent && this.parent.options && this.parent.options.sassOptions)
+      || {};
 
     if (envConfig) {
       console.warn("Deprecation warning: sassOptions should be moved to your ember-cli-build"); // eslint-disable-line
