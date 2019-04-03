@@ -74,11 +74,17 @@ module.exports = {
     var env  = process.env.EMBER_ENV;
     var envConfig = this.project.config(env).sassOptions;
 
+    var app = this.app;
+    var parent = this.parent;
+    var hostApp = typeof this._findHost === 'function' ? this._findHost() : undefined;
+
     // *Either* use the options for an addon which is consuming this, *or* for
     // an app which is consuming this, but never *both* at the same time. The
     // special case here is when testing an addon.
-    var options = (this.app && this.app.options && this.app.options.sassOptions)
-      || (this.parent && this.parent.options && this.parent.options.sassOptions)
+    // In lazy loading engines, the host might be different from the parent, so we fall back to that one
+    var options = (app && app.options && app.options.sassOptions)
+      || (parent && parent.options && parent.options.sassOptions)
+      || (hostApp && hostApp.options && hostApp.options.sassOptions)
       || {};
 
     if (envConfig) {
