@@ -5,9 +5,9 @@
 [![Ember Observer Score](http://emberobserver.com/badges/ember-cli-sass.svg)](http://emberobserver.com/addons/ember-cli-sass)
 [![Dependency Status](https://david-dm.org/aexmachina/ember-cli-sass.svg)](https://david-dm.org/aexmachina/ember-cli-sass)
 
-ember-cli-sass uses [Dart Sass][] to preprocess your ember-cli app's files and provides support for source maps and include paths. It provides support for the common use case for Ember.js projects:
+ember-cli-sass uses [Sass][] to preprocess your ember-cli app's styles, and provides support for source maps and include paths. It provides support for the common use case for Ember.js projects:
 
-[Dart Sass]: https://sass-lang.com/dart-sass
+[Sass]: https://sass-lang.com/
 
 - Source maps by default in development
 - Support for [`outputPaths` configuration](http://ember-cli.com/user-guide/#configuring-output-paths)
@@ -30,9 +30,13 @@ npm install --save ember-cli-sass sass
 
 ## Using a different Sass implementation
 
-By default this addon uses a distribution of Dart Sass that is compiled to pure JavaScript, if you would like to use an alternative implementation (e.g. [`node-sass`](https://github.com/sass/node-sass)), you must pass a Sass implementation to the `sassOptions`
-config property in `ember-cli-build.js` (or in `Brocfile.js` if you are using an
-Ember CLI version older than 1.13):
+By default this addon uses a distribution of [Dart Sass][] that is compiled to pure JavaScript. Dart Sass is the reference implementation for Sass, but it does provides significantly slower compilation times than LibSass (via `node-sass`).
+
+[Dart Sass]: https://sass-lang.com/dart-sass
+
+If you would like to use an alternative implementation (e.g. [`node-sass`](https://github.com/sass/node-sass)), you must
+pass a Sass implementation to the `sassOptions` config property in `ember-cli-build.js` (or in `Brocfile.js` if you are 
+using an Ember CLI version older than 1.13):
 
 ```javascript
 var nodeSass = require('node-sass');
@@ -201,3 +205,7 @@ and then you can include the definitions inside the engines SASS files via:
 ```scss
 @import "common/vars";
 ```
+
+## Changelog
+
+- v9.0.0 Added support for multiple sass implementations (e.g. Dart Sass, LibSass, etc.) The default Sass implementation is [Dart Sass](https://sass-lang.com/dart-sass), which is now the [reference implementation of Sass](http://sass.logdown.com/posts/1022316-announcing-dart-sass). This provides significantly slower compilation times than node-sass, but you can see instructions above if you'd like to continue using node-sass.
