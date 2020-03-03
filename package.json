@@ -8,7 +8,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/aexmachina/ember-cli-sass.git"
+    "url": "git://github.com/adopted-ember-addons/ember-cli-sass.git"
   },
   "license": "MIT",
   "author": "@aexmachina",
@@ -64,7 +64,7 @@
     "configPath": "tests/dummy/config"
   },
   "bugs": {
-    "url": "https://github.com/aexmachina/ember-cli-sass/issues"
+    "url": "https://github.com/adopted-ember-addons/ember-cli-sass/issues"
   },
-  "homepage": "https://github.com/aexmachina/ember-cli-sass"
+  "homepage": "https://github.com/adopted-ember-addons/ember-cli-sass"
 }
