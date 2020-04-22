@@ -127,7 +127,7 @@ To compile SASS within an ember-cli addon, there are a few additional steps:
 2. Ensure you've installed `ember-cli-sass` and either `sass` or `node-sass`
    under `dependencies` in your `package.json`.
 
-3. Define an `included` function in your app:
+3. Define an `included` function in your addon's `index.js`:
    ```js
    // in your index.js
    module.exports = {
