@@ -26,6 +26,8 @@ class SassCompiler extends Filter {
     this.inputTree = inputTree;
     this.inputOutputMap = inputOutputMap;
     this.lastBuildStart = undefined;
+    this.extensions = ['scss', 'sass'];
+    this.targetExtension = 'css';
 
     this.renderSassSync = options.implementation.renderSync;
 
@@ -94,7 +96,7 @@ class SassCompiler extends Filter {
    */
   rethrowBuildError(error) {
     if (typeof error === 'string') {
-      throw new Error('[string exception] ' + error);
+      throw new Error('ember-cli-sass: [string exception] ' + error);
     } else {
       error.type = 'Sass Syntax Error';
       error.message = error.formatted;
@@ -107,9 +109,6 @@ class SassCompiler extends Filter {
     }
   }
 }
-
-SassCompiler.prototype.extensions = ['scss', 'sass'];
-SassCompiler.prototype.targetExtension = 'css';
 
 function SASSPlugin(optionsFn) {
   this.name = 'ember-cli-sass';
@@ -160,17 +159,18 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
     return { input, output };
   });
 
-  var trees = [
-    new SassCompiler(new Funnel(mergeTrees(inputTrees), {
-      include: ['**/*.scss', '**/*.sass', '**/*.css'],
-    }), inputOutputMap, options)
-  ];
+  const compileSassTree = new SassCompiler(new Funnel(mergeTrees(inputTrees), {
+    include: ['**/*.scss', '**/*.sass', '**/*.css'],
+  }), inputOutputMap, options);
 
   if (options.passthrough) {
-    inputTrees.push(new Funnel(tree, options.passthrough));
+    return mergeTrees([
+      new Funnel(tree, options.passthrough),
+      compileSassTree,
+    ], { overwrite: true })
   }
 
-  return mergeTrees(trees, { overwrite: true });
+  return compileSassTree;
 };
 
 module.exports = {
