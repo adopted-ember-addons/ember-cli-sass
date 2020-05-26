@@ -1,10 +1,115 @@
 'use strict';
 /* eslint-env node */
-var SassCompilerFactory = require('broccoli-sass-source-maps');
-var path = require('path');
-var VersionChecker = require('ember-cli-version-checker');
-var Funnel = require('broccoli-funnel');
-var mergeTrees = require('broccoli-merge-trees');
+
+const path = require('path');
+const Filter = require('broccoli-persistent-filter');
+const mkdirp = require('mkdirp');
+const VersionChecker = require('ember-cli-version-checker');
+const Funnel = require('broccoli-funnel');
+const mergeTrees = require('broccoli-merge-trees');
+const fs = require('fs');
+const includePathSearcher = require('include-path-searcher');
+
+class SassCompiler extends Filter {
+  constructor(inputTree, inputOutputMap, _options) {
+    let options = _options || {};
+    if (!options || typeof options !== 'object') {
+      options = { persist: true };
+    } else if (typeof options.persist === 'undefined') {
+      options.persist = true;
+    }
+
+    super(inputTree, options);
+
+    this.name = 'sass-compiler';
+    this.options = options;
+    this.inputTree = inputTree;
+    this.inputOutputMap = inputOutputMap;
+    this.lastBuildStart = undefined;
+
+    this.renderSassSync = options.implementation.renderSync;
+
+    this.sassOptions = {
+      importer: options.importer,
+      functions: options.functions,
+      indentedSyntax: options.indentedSyntax,
+      omitSourceMapUrl: options.omitSourceMapUrl,
+      outputStyle: options.outputStyle,
+      precision: options.precision,
+      sourceComments: options.sourceComments,
+      sourceMap: options.sourceMap,
+      sourceMapEmbed: options.sourceMapEmbed,
+      sourceMapContents: options.sourceMapContents,
+      sourceMapRoot: options.sourceMapRoot,
+      fiber: options.fiber
+    };
+  }
+
+  baseDir() {
+    return __dirname;
+  }
+
+  processString() {
+    if(this.inputTree._buildStart !== this.lastBuildStart) {
+      this.inputOutputMap.forEach(({ input, output}) => {
+        var destFile = path.join(this.outputPath, output);
+        var sourceMapFile = this.sassOptions.sourceMap;
+
+        if (typeof sourceMapFile !== 'string') {
+          sourceMapFile = destFile + '.map';
+        }
+
+        mkdirp.sync(path.dirname(destFile));
+
+        var sassOptions = {
+          file: includePathSearcher.findFileSync(input, this.inputPaths),
+          includePaths: this.inputPaths,
+          outFile: destFile
+        };
+
+        Object.assign(sassOptions, this.sassOptions);
+
+        try {
+          const result = this.renderSassSync(sassOptions);
+          fs.writeFileSync(destFile, result.css);
+
+          if (this.sassOptions.sourceMap && !this.sassOptions.sourceMapEmbed) {
+            fs.writeFileSync(sourceMapFile, result.map)
+          }
+        } catch(ex) {
+          this.rethrowBuildError(ex);
+        }
+      });
+
+      this.lastBuildStart = this.inputTree._buildStart;
+    }
+
+    return '';
+  }
+
+  /**
+   * Mutates the error to include properties expected by Ember CLI.
+   * See https://github.com/ember-cli/ember-cli/blob/master/docs/ERRORS.md#error-object
+   * @param {Error} error
+   */
+  rethrowBuildError(error) {
+    if (typeof error === 'string') {
+      throw new Error('[string exception] ' + error);
+    } else {
+      error.type = 'Sass Syntax Error';
+      error.message = error.formatted;
+      error.location = {
+        line: error.line,
+        column: error.column
+      };
+
+      throw error;
+    }
+  }
+}
+
+SassCompiler.prototype.extensions = ['scss', 'sass'];
+SassCompiler.prototype.targetExtension = 'css';
 
 function SASSPlugin(optionsFn) {
   this.name = 'ember-cli-sass';
@@ -21,8 +126,7 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
       include: ['app/styles/**/*'],
       annotation: 'Funnel (styles)'
     })];
-  }
-  else {
+  } else {
     inputTrees = [tree];
   }
 
@@ -46,20 +150,27 @@ SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions
     }
   }
 
-  var SassCompiler = SassCompilerFactory(options.implementation);
   var ext = options.extension || 'scss';
   var paths = options.outputPaths;
-  var trees = Object.keys(paths).map(function(file) {
+
+  var inputOutputMap = Object.keys(paths).map(function(file) {
     var input = path.join(inputPath, file + '.' + ext);
     var output = paths[file];
-    return new SassCompiler(inputTrees, input, output, options);
+
+    return { input, output };
   });
 
+  var trees = [
+    new SassCompiler(new Funnel(mergeTrees(inputTrees), {
+      include: ['**/*.scss', '**/*.sass', '**/*.css'],
+    }), inputOutputMap, options)
+  ];
+
   if (options.passthrough) {
-    trees.push(new Funnel(tree, options.passthrough));
+    inputTrees.push(new Funnel(tree, options.passthrough));
   }
 
-  return mergeTrees(trees);
+  return mergeTrees(trees, { overwrite: true });
 };
 
 module.exports = {

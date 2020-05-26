@@ -24,10 +24,12 @@
     "lint:js": "eslint ."
   },
   "dependencies": {
-    "broccoli-funnel": "^2.0.1",
+    "broccoli-funnel": "^3.0.3",
     "broccoli-merge-trees": "^3.0.1",
-    "broccoli-sass-source-maps": "^4.0.0",
-    "ember-cli-version-checker": "^2.1.0"
+    "broccoli-persistent-filter": "^3.0.0",
+    "ember-cli-version-checker": "^2.1.0",
+    "include-path-searcher": "^0.1.0",
+    "mkdirp": "^1.0.4"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.7.0",
