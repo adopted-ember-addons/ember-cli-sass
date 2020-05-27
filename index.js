@@ -81,10 +81,10 @@ module.exports = {
     // *Either* use the options for an addon which is consuming this, *or* for
     // an app which is consuming this, but never *both* at the same time. The
     // special case here is when testing an addon.
-    // In lazy loading engines, the host might be different from the parent, so we fall back to that one
-    var options = (app && app.options && app.options.sassOptions)
+    // In lazy loading engines, the host might be different from the parent, so check for that one, then fallback to parent, then to app.
+    var options = (hostApp && hostApp.options && hostApp.options.sassOptions)
       || (parent && parent.options && parent.options.sassOptions)
-      || (hostApp && hostApp.options && hostApp.options.sassOptions)
+      || (app && app.options && app.options.sassOptions)
       || {};
 
     if (envConfig) {
