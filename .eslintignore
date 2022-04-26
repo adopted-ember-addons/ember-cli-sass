@@ -6,8 +6,6 @@
 /dist/
 /tmp/
 
-# dependencies
-/bower_components/
 
 # misc
 /coverage/
