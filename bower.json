@@ -1,6 +1,0 @@
-{
-  "name": "ember-cli-sass",
-  "dependencies": {
-    "SpinKit": "^1.2.5"
-  }
-}

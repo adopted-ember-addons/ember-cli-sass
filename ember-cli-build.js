@@ -1,25 +1,23 @@
 /* eslint-env node */
-'use strict';
+"use strict";
 
-const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
-const sass = require('sass');
+const EmberAddon = require("ember-cli/lib/broccoli/ember-addon");
+const sass = require("sass");
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   let app = new EmberAddon(defaults, {
     outputPaths: {
       app: {
         css: {
-          'app': '/assets/dummy.css',
-          'output-path': '/assets/output-path.css'
-        }
-      }
+          app: "/assets/dummy.css",
+          "output-path": "/assets/output-path.css",
+        },
+      },
     },
     sassOptions: {
       implementation: sass,
-      includePaths: [
-        'bower_components/SpinKit/scss',
-      ]
-    }
+      includePaths: ["node_modules/spinkit/scss"],
+    },
   });
 
   /*

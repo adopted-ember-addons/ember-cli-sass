@@ -14,17 +14,13 @@ function SASSPlugin(optionsFn) {
 
 SASSPlugin.prototype.toTree = function(tree, inputPath, outputPath, inputOptions) {
   var options = Object.assign({}, this.optionsFn(), inputOptions);
-  var inputTrees;
 
-  if (options.onlyIncluded) {
-    inputTrees = [new Funnel(tree, {
-      include: ['app/styles/**/*'],
+  var inputTrees = [
+    new Funnel(tree, {
+      include: [options.onlyIncluded ? 'app/styles/**/*' : /\.(scss|sass|css)$/],
       annotation: 'Funnel (styles)'
-    })];
-  }
-  else {
-    inputTrees = [tree];
-  }
+    })
+  ];
 
   if (options.includePaths) {
     inputTrees = inputTrees.concat(options.includePaths);

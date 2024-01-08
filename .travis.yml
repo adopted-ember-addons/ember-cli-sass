@@ -3,7 +3,8 @@ language: node_js
 node_js:
   # we recommend testing addons with the same minimum supported node version as Ember CLI
   # so that your addon works for all apps
-  - "6"
+  - "10"
+  - "12"
 
 sudo: false
 dist: trusty
@@ -23,9 +24,6 @@ env:
   matrix:
     # we recommend new addons test the current and previous LTS
     # as well as latest stable release (bonus points to beta/canary)
-    - EMBER_TRY_SCENARIO=ember-lts-2.12
-    - EMBER_TRY_SCENARIO=ember-lts-2.16
-    - EMBER_TRY_SCENARIO=ember-lts-2.18
     - EMBER_TRY_SCENARIO=ember-release
     - EMBER_TRY_SCENARIO=ember-beta
     - EMBER_TRY_SCENARIO=ember-canary
@@ -38,13 +36,11 @@ matrix:
 
 before_install:
   - npm config set spin false
-  - npm install -g npm@4 bower
+  - npm install -g npm@4
   - npm --version
-  - bower --version
 
 install:
   - npm install
-  - bower install
 
 script:
   - npm run lint:js
