@@ -20,6 +20,16 @@ ember-cli-sass uses [Sass][] to preprocess your ember-cli app's styles, and prov
 ember install ember-cli-sass
 ```
 
+### Use SASS in an Ember App
+
+After you've installed `ember-cli-sass` in an app, the next step is to create a SASS file at `app/styles/app.scss`. 
+This is where your new styles can go. Give it a try! If you are having trouble seeing your work
+in the served app, try restarting your local server.
+
+It's important to know that you can use more than just the one `app.scss` for your work. 
+To split your styles into multiple SASS files, create more `.scss` files in the
+`styles` folder. Then in your `app.scss`, add an `@import 'yourfilename';` to the top.
+
 ### Addon Development
 
 If you want to use ember-cli-sass in an addon and you want to distribute the compiled CSS it must be installed as a `dependency` so that `addon/styles/addon.scss` is compiled into `dist/assets/vendor.css`. This can be done using:
